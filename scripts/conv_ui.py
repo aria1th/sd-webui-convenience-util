@@ -13,7 +13,7 @@ def calculate_ratio(image, shorter_side_length: int):
 
 def calculate_ratios(image):
     results = []
-    for side_length in [512, 768, 1024]:
+    for side_length in [512, 768, 896]:
         new_width, new_height = calculate_ratio(image, side_length)
         results.append(f"{new_width} x {new_height}")
     return results
@@ -25,8 +25,8 @@ def on_ui_tab_called():
             ratio_results_512 = gr.Textbox(lines=1, label="Results for 512")
             ratio_results_768 = gr.Textbox(lines=1, label="Results for 768")
             ratio_results_1024 = gr.Textbox(lines=1, label="Results for 1024")
-            button = gr.Button(text="Calculate")
-            button.click(
+            #button = gr.Button(text="Calculate")
+            image.upload(
                 fn=calculate_ratios,
                 inputs=[image],
                 outputs=[ratio_results_512, ratio_results_768, ratio_results_1024]
