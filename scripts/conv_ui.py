@@ -15,7 +15,15 @@ def calculate_ratios(image):
     results = []
     for side_length in [512, 768, 896]:
         new_width, new_height = calculate_ratio(image, side_length)
-        results.append(f"{new_width} x {new_height}")
+        shorter_side = min(new_width, new_height)
+        longer_side = max(new_width, new_height)
+        ratio = longer_side / shorter_side
+        # get 1:x or x:1 ratio
+        if new_width == shorter_side:
+            ratio_str = f"1:{ratio}"
+        else:
+            ratio_str = f"{ratio}:1"
+        results.append(f"{new_width} x {new_height} ({ratio_str})")
     return results
 
 def on_ui_tab_called():
